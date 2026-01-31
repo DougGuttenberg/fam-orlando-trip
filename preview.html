@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <title>Orlando 2025 - Family Trip Planner</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600&family=Nunito:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+/* Orlando Trip Planner - Mobile-First Magic Theme */
+
+:root {
+  --sunset-pink: #FF6B9D;
+  --sunset-orange: #FFB347;
+  --golden-hour: #FFD93D;
+  --magic-purple: #9B59B6;
+  --twilight-blue: #5DADE2;
+  --palm-green: #27AE60;
+  --sand-light: #FFF8F0;
+  --sand-warm: #FFECD2;
+  --text-primary: #2C3E50;
+  --text-secondary: #5D6D7E;
+  --text-light: #8E99A4;
+  --card-bg: rgba(255, 255, 255, 0.97);
+  --card-shadow: 0 4px 20px rgba(255, 107, 157, 0.12);
+  --border-light: rgba(255, 179, 71, 0.3);
+  --ok-green: #27AE60;
+  --ok-green-light: #E8F8F0;
+  --concern-amber: #F39C12;
+  --concern-amber-light: #FEF5E7;
+  --space-xs: 0.375rem;
+  --space-sm: 0.625rem;
+  --space-md: 0.875rem;
+  --space-lg: 1.25rem;
+  --space-xl: 1.5rem;
+  --space-2xl: 2rem;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+
+body {
+  font-family: 'Nunito', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: linear-gradient(135deg, var(--sand-light) 0%, var(--sand-warm) 50%, #FFE4E1 100%);
+  color: var(--text-primary);
+  line-height: 1.55;
+  min-height: 100vh;
+  font-size: 15px;
+  -webkit-font-smoothing: antialiased;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: 200px;
+  background: linear-gradient(180deg, rgba(255, 107, 157, 0.08) 0%, transparent 100%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.app-container {
+  max-width: 100%;
+  margin: 0 auto;
+  padding: var(--space-md);
+  position: relative;
+  z-index: 1;
+}
+
+.header {
+  text-align: center;
+  padding: var(--space-xl) var(--space-sm);
+  margin-bottom: var(--space-lg);
+}
+
+.header-icon {
+  font-size: 3rem;
+  margin-bottom: var(--space-sm);
+  display: block;
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+.header h1 {
+  font-family: 'Fredoka', sans-serif;
+  font-size: 1.875rem;
+  font-weight: 600;
+  background: linear-gradient(135deg, var(--sunset-pink), var(--sunset-orange), var(--golden-hour));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: var(--space-xs);
+}
+
+.header .subtitle {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+.header .dates {
+  display: inline-block;
+  background: linear-gradient(135deg, var(--sunset-pink), var(--sunset-orange));
+  color: white;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-weight: 600;
+  font-size: 0.8rem;
+  margin-top: var(--space-md);
+  box-shadow: 0 3px 12px rgba(255, 107, 157, 0.25);
+}
+
+.welcome-back {
+  background: linear-gradient(135deg, var(--ok-green-light), #D5F5E3);
+  border-radius: 12px;
+  padding: var(--space-md);
+  margin-bottom: var(--space-lg);
+  border-left: 3px solid var(--ok-green);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-sm);
+}
+
+.welcome-back p {
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--ok-green);
+}
+
+.welcome-back button {
+  padding: 8px 12px;
+  font-size: 0.8rem;
+  font-family: inherit;
+  background: white;
+  color: var(--text-secondary);
+  border: 1px solid var(--border-light);
+  border-radius: 6px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.section-card {
+  background: var(--card-bg);
+  border-radius: 16px;
+  padding: var(--space-lg);
+  margin-bottom: var(--space-lg);
+  box-shadow: var(--card-shadow);
+  border: 1.5px solid transparent;
+}
+
+.section-card.park-day { border-left: 4px solid var(--magic-purple); }
+.section-card.park-day.universal { border-left-color: var(--twilight-blue); }
+.section-card.park-day.animal-kingdom { border-left-color: var(--palm-green); }
+.section-card.park-day.hollywood-studios { border-left-color: var(--sunset-orange); }
+
+.section-header {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-md);
+}
+
+.section-icon {
+  font-size: 1.75rem;
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+.section-title-group { flex: 1; min-width: 0; }
+
+.section-title {
+  font-family: 'Fredoka', sans-serif;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 2px;
+  line-height: 1.25;
+}
+
+.section-date {
+  display: inline-block;
+  background: linear-gradient(135deg, var(--sunset-pink), var(--sunset-orange));
+  color: white;
+  padding: 2px 10px;
+  border-radius: 10px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.section-content {
+  color: var(--text-secondary);
+  margin-bottom: var(--space-md);
+  font-size: 0.925rem;
+}
+
+.section-content p { margin-bottom: var(--space-sm); }
+.section-content p:last-child { margin-bottom: 0; }
+.section-content strong { color: var(--text-primary); font-weight: 600; }
+
+.attendance {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xs);
+  margin: var(--space-sm) 0;
+}
+
+.attendance-chip {
+  background: linear-gradient(135deg, var(--sand-warm), #FFF5E6);
+  padding: 4px 10px;
+  border-radius: 16px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  border: 1px solid var(--border-light);
+  white-space: nowrap;
+}
+
+.attendance-chip.note {
+  background: linear-gradient(135deg, var(--concern-amber-light), #FFF3E0);
+  border-color: var(--concern-amber);
+  font-style: italic;
+  font-size: 0.75rem;
+}
+
+.info-box {
+  background: linear-gradient(135deg, var(--sand-warm), #FFF5E6);
+  border-radius: 10px;
+  padding: var(--space-md);
+  margin: var(--space-sm) 0;
+  border-left: 3px solid var(--golden-hour);
+}
+
+.info-box.tip {
+  background: linear-gradient(135deg, #E8F8F0, #D5F5E3);
+  border-left-color: var(--palm-green);
+}
+
+.info-box p { margin: 0; font-size: 0.875rem; }
+
+.section-content ul { list-style: none; margin: var(--space-sm) 0; }
+
+.section-content ul li {
+  position: relative;
+  padding-left: 1.25rem;
+  margin-bottom: var(--space-xs);
+  font-size: 0.9rem;
+}
+
+.section-content ul li::before {
+  content: '✦';
+  position: absolute;
+  left: 0;
+  color: var(--sunset-orange);
+  font-size: 0.7rem;
+  top: 3px;
+}
+
+.feedback-widget {
+  background: linear-gradient(135deg, var(--sand-light), var(--sand-warm));
+  border-radius: 12px;
+  padding: var(--space-md);
+  margin-top: var(--space-md);
+  border: 1px solid var(--border-light);
+}
+
+.feedback-widget h4 {
+  font-family: 'Fredoka', sans-serif;
+  font-size: 0.95rem;
+  color: var(--text-primary);
+  margin-bottom: var(--space-sm);
+}
+
+.feedback-buttons {
+  display: flex;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-sm);
+}
+
+.feedback-btn {
+  flex: 1;
+  padding: 12px 8px;
+  font-size: 0.85rem;
+  font-family: inherit;
+  font-weight: 600;
+  border: 2px solid var(--border-light);
+  border-radius: 10px;
+  background: white;
+  cursor: pointer;
+  transition: all 0.15s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
+
+.feedback-btn:active { transform: scale(0.98); }
+.feedback-btn.ok:hover, .feedback-btn.ok.selected { background: var(--ok-green-light); border-color: var(--ok-green); color: var(--ok-green); }
+.feedback-btn.concern:hover, .feedback-btn.concern.selected { background: var(--concern-amber-light); border-color: var(--concern-amber); color: var(--concern-amber); }
+
+.feedback-comment {
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+  font-family: inherit;
+  border: 2px solid var(--border-light);
+  border-radius: 10px;
+  background: white;
+  resize: vertical;
+  min-height: 70px;
+}
+
+.feedback-comment:focus { outline: none; border-color: var(--sunset-orange); }
+.feedback-comment::placeholder { color: var(--text-light); font-size: 0.9rem; }
+
+.special-input { margin-top: var(--space-md); }
+.special-input label { display: block; font-weight: 600; font-size: 0.9rem; color: var(--text-primary); margin-bottom: var(--space-xs); }
+
+.special-input select, .special-input textarea {
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+  font-family: inherit;
+  border: 2px solid var(--border-light);
+  border-radius: 10px;
+  background: white;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.special-input select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%235D6D7E' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10l-5 5z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  padding-right: 36px;
+}
+
+.special-input textarea { resize: vertical; min-height: 60px; }
+
+.private-feedback {
+  background: linear-gradient(135deg, #F8F9FA, #EEF2F7);
+  border: 2px dashed var(--text-light);
+}
+
+.privacy-note {
+  background: white;
+  border-radius: 8px;
+  padding: var(--space-md);
+  margin-bottom: var(--space-lg);
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  border-left: 3px solid var(--magic-purple);
+}
+
+.form-group { margin-bottom: var(--space-lg); }
+.form-group label { display: block; font-weight: 600; font-size: 0.9rem; color: var(--text-primary); margin-bottom: var(--space-xs); }
+
+.form-group textarea {
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+  font-family: inherit;
+  border: 2px solid var(--border-light);
+  border-radius: 10px;
+  background: white;
+  resize: vertical;
+  min-height: 70px;
+}
+
+.submit-section { text-align: center; padding: var(--space-xl) 0; }
+
+.btn-submit {
+  width: 100%;
+  padding: 16px var(--space-xl);
+  font-size: 1.1rem;
+  font-weight: 700;
+  font-family: 'Fredoka', sans-serif;
+  background: linear-gradient(135deg, var(--sunset-pink), var(--sunset-orange), var(--golden-hour));
+  color: white;
+  border: none;
+  border-radius: 14px;
+  cursor: pointer;
+  box-shadow: 0 4px 20px rgba(255, 107, 157, 0.35);
+}
+
+.btn-submit:active { transform: translateY(0); }
+.submit-note { margin-top: var(--space-md); color: var(--text-light); font-size: 0.85rem; }
+
+.existing-feedback {
+  margin-top: var(--space-md);
+  padding-top: var(--space-md);
+  border-top: 1px solid var(--border-light);
+}
+
+.existing-feedback h5 {
+  font-family: 'Fredoka', sans-serif;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  margin-bottom: var(--space-sm);
+}
+
+.feedback-item {
+  background: white;
+  border-radius: 8px;
+  padding: var(--space-sm) var(--space-md);
+  margin-bottom: var(--space-xs);
+  border-left: 3px solid var(--border-light);
+}
+
+.feedback-item.ok { border-left-color: var(--ok-green); }
+.feedback-item.concern { border-left-color: var(--concern-amber); }
+
+.feedback-meta {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-xs);
+  margin-bottom: 2px;
+}
+
+.feedback-name { font-weight: 600; font-size: 0.85rem; color: var(--text-primary); }
+.feedback-sentiment { font-size: 0.75rem; padding: 2px 6px; border-radius: 6px; }
+.feedback-sentiment.ok { background: var(--ok-green-light); color: var(--ok-green); }
+.feedback-sentiment.concern { background: var(--concern-amber-light); color: var(--concern-amber); }
+.feedback-text { color: var(--text-secondary); font-size: 0.85rem; font-style: italic; }
+
+.footer { text-align: center; padding: var(--space-lg); color: var(--text-light); font-size: 0.8rem; }
+
+.demo-badge {
+  position: fixed;
+  top: 8px;
+  right: 8px;
+  background: var(--magic-purple);
+  color: white;
+  padding: 4px 10px;
+  border-radius: 16px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  z-index: 1000;
+}
+
+@media (min-width: 480px) {
+  :root { --space-xs: 0.5rem; --space-sm: 0.75rem; --space-md: 1rem; --space-lg: 1.5rem; --space-xl: 2rem; }
+  body { font-size: 16px; }
+  .header h1 { font-size: 2.25rem; }
+  .header-icon { font-size: 3.5rem; }
+  .section-icon { font-size: 2rem; }
+  .section-title { font-size: 1.35rem; }
+}
+
+@media (min-width: 640px) {
+  .app-container { max-width: 600px; padding: var(--space-lg); }
+  .section-card { padding: var(--space-xl); }
+  .btn-submit { width: auto; min-width: 280px; padding: 16px 48px; }
+}
+
+@supports (padding-bottom: env(safe-area-inset-bottom)) {
+  .app-container { padding-bottom: calc(var(--space-lg) + env(safe-area-inset-bottom)); }
+}
+  </style>
+</head>
+<body>
+  <div class="demo-badge">Preview</div>
+
+  <div class="app-container">
+    <header class="header">
+      <span class="header-icon">🏰</span>
+      <h1>Orlando 2025</h1>
+      <p class="subtitle">Our family adventure, planned together</p>
+      <span class="dates">Feb 19–23, 2025</span>
+    </header>
+
+    <div class="welcome-back">
+      <p>👋 Viewing as: Tal & Doug & Fam</p>
+      <button>Switch</button>
+    </div>
+
+    <!-- Trip Overview -->
+    <div class="section-card">
+      <div class="section-header">
+        <span class="section-icon">🗺️</span>
+        <div class="section-title-group">
+          <h3 class="section-title">The Big Picture</h3>
+        </div>
+      </div>
+      <div class="section-content">
+        <p>Here's the plan as it stands. <strong>Nothing is locked.</strong> This is a roadmap, not a minute-by-minute schedule.</p>
+        <div class="info-box tip">
+          <p><strong>Expect flexibility:</strong> With 8 adults and 5 kids, we'll split into groups based on energy and ride heights. That's the plan.</p>
+        </div>
+      </div>
+      <div class="feedback-widget">
+        <h4>💬 What do you think?</h4>
+        <div class="feedback-buttons">
+          <button class="feedback-btn ok">✅ Looks good</button>
+          <button class="feedback-btn concern">⚠️ Concern</button>
+        </div>
+        <textarea class="feedback-comment" placeholder="Optional: Add a comment..."></textarea>
+      </div>
+    </div>
+
+    <!-- Saturday - Universal -->
+    <div class="section-card park-day universal">
+      <div class="section-header">
+        <span class="section-icon">🎢</span>
+        <div class="section-title-group">
+          <h3 class="section-title">Saturday: Universal</h3>
+          <span class="section-date">February 21</span>
+        </div>
+      </div>
+      <div class="section-content">
+        <p><strong>Both parks</strong>—Studios and Islands of Adventure. Big thrill day for those who want it.</p>
+        <div class="attendance">
+          <span class="attendance-chip">Everyone</span>
+        </div>
+        <ul>
+          <li>Big rides for thrill-seekers</li>
+          <li>Family-pace groups for younger kids</li>
+          <li>Splitting up is expected</li>
+        </ul>
+        <div class="info-box">
+          <p>Strollers needed for Liam (1) and Roman (2).</p>
+        </div>
+      </div>
+      <div class="feedback-widget">
+        <h4>💬 What do you think?</h4>
+        <div class="feedback-buttons">
+          <button class="feedback-btn ok selected">✅ Looks good</button>
+          <button class="feedback-btn concern">⚠️ Concern</button>
+        </div>
+        <textarea class="feedback-comment" placeholder="Optional: Add a comment..."></textarea>
+        <div class="existing-feedback">
+          <h5>👥 What others have said</h5>
+          <div class="feedback-item ok">
+            <div class="feedback-meta">
+              <span class="feedback-name">Ben & Mary & Fam</span>
+              <span class="feedback-sentiment ok">✅ Good</span>
+            </div>
+            <p class="feedback-text">"Excited for Hagrid's!"</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sunday - Animal Kingdom -->
+    <div class="section-card park-day animal-kingdom">
+      <div class="section-header">
+        <span class="section-icon">🦁</span>
+        <div class="section-title-group">
+          <h3 class="section-title">Sunday: Animal Kingdom</h3>
+          <span class="section-date">February 22</span>
+        </div>
+      </div>
+      <div class="section-content">
+        <p>A gentler pace. Great for the little ones.</p>
+        <div class="attendance">
+          <span class="attendance-chip">Everyone (AM)</span>
+          <span class="attendance-chip note">Joy's fam leaves mid-PM</span>
+        </div>
+        <ul>
+          <li>Kilimanjaro Safaris (best done early)</li>
+          <li>Avatar Flight of Passage</li>
+          <li>Animal exhibits for the kids</li>
+        </ul>
+      </div>
+      <div class="feedback-widget">
+        <h4>💬 What do you think?</h4>
+        <div class="feedback-buttons">
+          <button class="feedback-btn ok">✅ Looks good</button>
+          <button class="feedback-btn concern">⚠️ Concern</button>
+        </div>
+        <textarea class="feedback-comment" placeholder="Optional: Add a comment..."></textarea>
+      </div>
+    </div>
+
+    <!-- Lodging -->
+    <div class="section-card">
+      <div class="section-header">
+        <span class="section-icon">🏠</span>
+        <div class="section-title-group">
+          <h3 class="section-title">Where We're Staying</h3>
+        </div>
+      </div>
+      <div class="section-content">
+        <p><strong>Friday night:</strong> Hotel near Universal.</p>
+        <p><strong>Sat & Sun:</strong> Large Airbnb near Disney. Cost split evenly.</p>
+        <div class="info-box">
+          <p>Some families may prefer a nearby hotel instead of sharing the house—that's fine.</p>
+        </div>
+      </div>
+      <div class="special-input">
+        <label>Your preference for Sat/Sun nights?</label>
+        <select>
+          <option value="">Select...</option>
+          <option value="house">Shared house</option>
+          <option value="hotel">Nearby hotel</option>
+          <option value="none">No preference</option>
+        </select>
+      </div>
+      <div class="special-input">
+        <label>Any constraints? (sleep, space, cost)</label>
+        <textarea placeholder="Optional"></textarea>
+      </div>
+      <div class="feedback-widget">
+        <h4>💬 What do you think?</h4>
+        <div class="feedback-buttons">
+          <button class="feedback-btn ok">✅ Looks good</button>
+          <button class="feedback-btn concern">⚠️ Concern</button>
+        </div>
+        <textarea class="feedback-comment" placeholder="Optional: Add a comment..."></textarea>
+      </div>
+    </div>
+
+    <!-- Food -->
+    <div class="section-card">
+      <div class="section-header">
+        <span class="section-icon">🍳</span>
+        <div class="section-title-group">
+          <h3 class="section-title">Food Plan</h3>
+        </div>
+      </div>
+      <div class="section-content">
+        <ul>
+          <li>One grocery run early</li>
+          <li>Breakfast & snacks at the house</li>
+          <li>Pack at least one meal per park day</li>
+          <li>Mostly quick-service at parks</li>
+        </ul>
+      </div>
+      <div class="special-input">
+        <label>Dietary restrictions?</label>
+        <textarea placeholder="Allergies, vegetarian, etc."></textarea>
+      </div>
+      <div class="feedback-widget">
+        <h4>💬 What do you think?</h4>
+        <div class="feedback-buttons">
+          <button class="feedback-btn ok">✅ Looks good</button>
+          <button class="feedback-btn concern">⚠️ Concern</button>
+        </div>
+        <textarea class="feedback-comment" placeholder="Optional: Add a comment..."></textarea>
+      </div>
+    </div>
+
+    <!-- Private Feedback -->
+    <div class="section-card private-feedback">
+      <div class="section-header">
+        <span class="section-icon">🔒</span>
+        <div class="section-title-group">
+          <h3 class="section-title">Private Feedback</h3>
+        </div>
+      </div>
+      <div class="privacy-note">
+        Just between you and Doug. Use it for anything you'd rather not share with the whole group.
+      </div>
+      <div class="form-group">
+        <label>Budget sensitivity</label>
+        <textarea placeholder="Anything about costs?"></textarea>
+      </div>
+      <div class="form-group">
+        <label>Energy / pace concerns</label>
+        <textarea placeholder="Need more downtime?"></textarea>
+      </div>
+      <div class="form-group">
+        <label>Kid-specific constraints</label>
+        <textarea placeholder="Nap schedules, fears, needs..."></textarea>
+      </div>
+    </div>
+
+    <div class="submit-section">
+      <button class="btn-submit">Submit My Feedback ✨</button>
+      <p class="submit-note">You can come back and submit again if things change.</p>
+    </div>
+
+    <footer class="footer">
+      <p>Made with ☀️ for our February escape from winter.</p>
+    </footer>
+  </div>
+</body>
+</html>
