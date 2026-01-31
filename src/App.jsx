@@ -672,9 +672,9 @@ function Header() {
   return (
     <header className="header">
       <span className="header-icon">🏰</span>
-      <h1>Orlando 2025</h1>
+      <h1>Orlando 2026</h1>
       <p className="subtitle">Our family adventure, planned together</p>
-      <span className="dates">Feb 19–23, 2025</span>
+      <span className="dates">Feb 19–23, 2026</span>
     </header>
   )
 }
